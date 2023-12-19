@@ -1,0 +1,23 @@
+application:
+  host: 0.0.0.0
+  port: 5000
+database:
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+  db: user
+elasticsearch:
+    user_name: elastic
+    password: FfVARqrjg7A09ysVwzKlm9yL
+    host: https://my-deployment-25b26a.kb.europe-west4.gcp.elastic-cloud.com/
+authentication:
+  secret: secret
+redis:
+  host: 127.0.0.1
+mongodb: 
+  host: localhost
+  user_name: root
+  db_name: promotions
+  password: 1234
+  port: 27017

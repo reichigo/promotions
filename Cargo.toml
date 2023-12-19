@@ -1,0 +1,27 @@
+[package]
+name = "promotions"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+uuid = { version = "1.6.1", features = ["serde", "v4"] }
+async-trait = "0.1.74"
+chrono = { version = "0.4.31", features = ["serde"] }
+tonic = {version="0.10.2", features = ["tls", "transport"]}
+prost = "0.12.3"
+prost-types = "0.12.3"
+config = "0.13.4"
+serde = {version = "1.0", features = ["derive"] }
+tonic-build = { version = "0.10.2" }
+tokio = {version="1.34.0",features = ["full"]}
+mongodb = { version = "2.7.1", features = ["bson-chrono-0_4" ] }
+elasticsearch = "8.5.0-alpha.1"
+
+[build-dependencies]
+tonic-build = "0.10.2"
+
+[[bin]]
+name = "force-build"
+path = "src/build.rs"

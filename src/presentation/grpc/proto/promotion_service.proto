@@ -1,0 +1,82 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package promotions_service_proto;
+
+message CreatePromoCodeRequest {
+  string name = 1;
+  optional uint64 total_promo_code = 2;
+  google.protobuf.Timestamp expiration_date = 3;
+  uint32 quantityPerCustomer = 4;
+  optional double totalMoneyDiscount = 5;
+  optional uint32 percentageDiscount = 6;
+  optional google.protobuf.Timestamp dateActivatePromoCode = 7;
+  bool free_shipping = 8;
+  repeated string items_promotion = 9;
+  CreatePromoCodeRuleRequest rule = 10;
+}
+
+message CreatePromoCodeRuleRequest {
+  optional bool new_user = 1;
+  optional double min_money = 2;
+  optional uint32 min_items = 3;
+  optional CreatePromoCodeRuleItemRequest create_promo_code_rule_item_request = 4;
+}
+
+message CreatePromoCodeRuleItemRequest{
+  uint32 min_total_item = 1;
+  bool is_valid_min_item_just_items_inside_promotion = 2;
+}
+
+message CreatePromoCodeResponse{
+  string idPromotionCreated = 1;
+  string name = 2;
+  optional uint64 total_promo_code = 3;
+  google.protobuf.Timestamp expiration_date = 4;
+  uint32 quantity_per_customer = 5;
+  optional float totalMoneyDiscount = 6;
+  optional uint32 percentage_discount = 7;
+  bool free_shipping = 8;
+  google.protobuf.Timestamp date_activate_promo_code = 9;
+}
+
+message ApplyPromoCodeRequest{
+  string user_id = 1;
+}
+
+message ApplyPromoCodeResponse{
+  string message = 1;
+}
+
+message GetUserPromotionsRequest{
+  string user_id = 1;
+}
+
+message GetUserPromotionsResponse{
+  string idPromotionCreated = 1;
+  string name = 2;
+  google.protobuf.Timestamp expiration_date = 3;
+  uint32 quantity_per_customer = 4;
+  optional double total_money_discount = 5;
+  optional uint32 percentage_discount = 6;
+}
+
+message GetGeneralPromotionsRequest{
+
+}
+
+message GetGeneralPromotionsResponse{
+  string idPromotionCreated = 1;
+  string name = 2;
+  google.protobuf.Timestamp expiration_date = 3;
+  uint32 quantity_per_customer = 4;
+  optional double total_money_discount = 5;
+  optional uint32 percentage_discount = 6;
+}
+
+service PromotionService{
+  rpc CreatePromoCode(CreatePromoCodeRequest) returns (CreatePromoCodeResponse);
+  rpc ApplyPromoCode(ApplyPromoCodeRequest) returns (ApplyPromoCodeResponse);
+  rpc GetUserPromotions (GetUserPromotionsRequest) returns (GetUserPromotionsResponse);
+  rpc GetGeneralPromotions(GetGeneralPromotionsRequest) returns (GetGeneralPromotionsResponse);
+}
